@@ -270,7 +270,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   jbuilder (~> 2.7)
-  jquery-rails (= 4.4.0)
+  jquery-rails
   kaminari
   listen (~> 3.2)
   pg

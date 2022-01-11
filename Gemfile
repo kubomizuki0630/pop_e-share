@@ -58,7 +58,7 @@ gem 'carrierwave' , '~> 1.3' ,  '>= 1.3.1'
 gem 'cloudinary'
 gem 'dotenv-rails'
 gem 'kaminari'
-gem 'jquery-rails', '4.4.0'
+gem 'jquery-rails'
 group :production do
   gem 'pg'
 end
