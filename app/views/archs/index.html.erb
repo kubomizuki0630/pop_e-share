@@ -1,0 +1,50 @@
+<h1><%= link_to "E-Share", root_path %></h1>
+<% if user_signed_in? %>
+<%= link_to "MyPage", user_path(current_user.id) %>
+  <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "LogIn", root_path %>
+  <%= link_to "SignUp", new_user_registration_path %>
+<% end %>
+<%= link_to "newpost", arch_new_path %>
+
+<%= form_tag({controller:"archs",action:"index"}, method: :get) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'search'  %>
+<% end %>
+<%= page_entries_info @archs %>
+<div class="archs-container">
+  <% @archs.each do |arch| %>
+    <div class="arch">
+    <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %>
+    <a href="/users/<%= arch.user.id %>"><%= arch.user.name %></a><br>
+      title: <%= arch.title %><br>
+      <% if arch.image? %>
+             <%= image_tag arch.image_url, size: "250x200" %><br>
+      <% end %>
+    content: <%= arch.body %><br>
+    <%= arch.created_at %><br>
+    <div id="like_buttons_<%= arch.id %>">
+      <%= render partial: 'archs/arch', locals: { arch: arch} %>
+    </div>
+    <%= link_to "more", arch_path(arch.id),class: "show_link" %>
+  <% if user_signed_in? %>
+    <% if current_user.id == arch.user_id %>
+      <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
+      <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+    <% elsif current_user.admin? %>
+      <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
+      <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+    <% end %>
+  <% end %>
+    </div>
+  <% end %>
+</div>
+<%= paginate @archs %>
+
+<p>テスト</p>
+<script>
+  $(document).on('turbolinks:load', function() {
+    $("p").text("成功！！");
+  });
+</script>

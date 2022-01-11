@@ -1,0 +1,27 @@
+<h1><%= link_to "arch", root_path %></h1>
+<h3><%= @user.name %>'s page</h3>
+<%= image_tag @user.image_url, size: "250x200" if @user.image? %><br>
+<p>name : <%= @user.name %></p>
+<p> email: <%= @user.email %></p>
+<% if current_user.id == @user.id %>
+  <%= link_to "edit", edit_user_registration_path %>
+<% end %>
+<h2><%= @user.name %>'s posts</h2>
+<% @user.arches.each do |t| %>
+  title:<%= t.title %><br>
+  contents:<%= t.body %><br>
+  <%= t.created_at %><br>
+  <%= link_to "more", arch_path(t.id),class: "show_link" %>
+  <%= link_to "edit", edit_arch_path(t.id) ,class: "edit_link" %>
+  <%= button_to "delete", arch_path(t.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+<% end %>
+
+<h2>favorite posts</h2>
+<% @user.liked_arches.each do |t| %>
+  title:<%= t.title %><br>
+  contents:<%= t.body %><br>
+  <%= t.created_at %><br>
+  <%= link_to "more", arch_path(t.id),class: "show_link" %>
+  <%= link_to "edit", edit_arch_path(t.id) ,class: "edit_link" %>
+  <%= button_to "delete", arch_path(t.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+<% end %>

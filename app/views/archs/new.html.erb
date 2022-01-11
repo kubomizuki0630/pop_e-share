@@ -1,0 +1,22 @@
+<h1><%= link_to "arch", root_path %></h1>
+<h3>new post</h3>
+<%= form_for @arch , url: archs_path do |f| %>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, :size => 140 %>
+  </div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :body %>
+    <%= f.text_field :body, :size => 140 %>
+  </div>
+  <%= f.label :release, '公開', value: 1 %>
+<%= f.radio_button :release, '1' %>
+
+<%= f.label :release, '非公開', value: 0 %>
+<%= f.radio_button :release, '0' %><br>
+  <%= f.submit "post" %>
+<% end %>

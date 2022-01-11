@@ -1,0 +1,24 @@
+// Place all the styles related to the archs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.delete_button{
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px;
+  font-size: 15px;
+  text-decoration: none;
+  color: rgb(0, 140, 255);
+}
+.edit_link{
+  font-size: 15px;
+  text-decoration: none;
+  color: rgb(0, 140, 255);
+}
+.show_link{
+  font-size: 15px;
+  text-decoration: none;
+  color: rgb(0, 140, 255);
+}

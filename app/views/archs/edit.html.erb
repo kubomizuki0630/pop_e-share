@@ -1,0 +1,11 @@
+<%= form_for @arch do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title, :size => 140 %> <br>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <%= f.label :body %>
+  <%= f.text_field :body, :size => 140 %> 
+  <%= f.submit "編集する" %>
+<% end %>
