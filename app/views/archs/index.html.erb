@@ -24,9 +24,6 @@
       <% end %>
     content: <%= arch.body %><br>
     <%= arch.created_at %><br>
-    <div id="like_buttons_<%= arch.id %>">
-      <%= render partial: 'archs/arch', locals: { arch: arch} %>
-    </div>
     <%= link_to "more", arch_path(arch.id),class: "show_link" %>
   <% if user_signed_in? %>
     <% if current_user.id == arch.user_id %>
