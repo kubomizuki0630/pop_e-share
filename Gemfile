@@ -59,6 +59,7 @@ gem 'cloudinary'
 gem 'dotenv-rails'
 gem 'kaminari'
 gem 'rubyzip', '2.3.0'
+gem 'sprockets', '~> 4.0'
 group :production do
   gem 'pg'
 end
