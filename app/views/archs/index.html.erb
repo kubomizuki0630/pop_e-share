@@ -37,6 +37,7 @@
 </nav>
 <div class="container">
   <div class="top-image"></div>
+  <div class="latestposts text-center">LatestPosts</div>
   <div class="card-container">
     <% @archs.each do |arch| %>
       <div class="card" style="width: 18rem;">
@@ -46,7 +47,11 @@
         <div class="card-img-top"></div>
         <% end %>
         <div class="card-body">
+        <% if user_signed_in? %>
           <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
+        <% else %>
+          <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
+        <% end %>
             title: <%= arch.title %><br>
           content: <%= arch.body %><br>
           <%= arch.created_at %><br>
