@@ -37,10 +37,10 @@
 </nav>
 <div class="container">
   <div class="top-image"></div>
-  <div class="latestposts text-center">LatestPosts</div>
+  <div class="latestposts display-5 text-center mt-5 mb-5">Latest Posts</div>
   <div class="card-container">
     <% @archs.each do |arch| %>
-      <div class="card" style="width: 18rem;">
+      <div class="card mb-5" style="width: 18rem;">
         <% if arch.image? %>
             <%= image_tag arch.image_url, class: "card-img-top" %>
         <% else %>
