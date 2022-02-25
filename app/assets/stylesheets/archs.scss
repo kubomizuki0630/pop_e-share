@@ -1,7 +1,22 @@
 // Place all the styles related to the archs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+*{
+  margin: 0;
+  padding: 0;
+}
 
+.top-image{
+  background-image:url('toppage.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  // -moz-box-sizing: border-box;
+  // box-sizing: border-box;
+  background-size: contain;
+  width: 100%;
+  height: 60vh;
+  // padding-top: 62.5%;
+}
 .delete_button{
   background: transparent;
   border: none;
@@ -12,13 +27,24 @@
   text-decoration: none;
   color: rgb(0, 140, 255);
 }
-.edit_link{
+.link{
   font-size: 15px;
   text-decoration: none;
   color: rgb(0, 140, 255);
 }
-.show_link{
-  font-size: 15px;
-  text-decoration: none;
-  color: rgb(0, 140, 255);
+
+.card-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 25px 10%;
+}
+
+.card{
+  // width: 20%;
+}
+
+.card-img-top{
+  height: 250px;
 }

@@ -60,6 +60,7 @@ gem 'dotenv-rails'
 gem 'kaminari'
 gem 'rubyzip', '2.3.0'
 gem 'sprockets', '~> 4.0'
+gem 'bundler', '~> 2.2', '>= 2.2.17'
 group :production do
   gem 'pg'
 end
