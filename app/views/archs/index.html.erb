@@ -4,7 +4,7 @@
     <% @archs.each do |arch| %>
       <div class="card mb-5" style="width: 18rem;">
         <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
-          <%= arch.title %><br>
+          <div class="card-header card-title"><%= arch.title %></div>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
           <% else %>
@@ -18,16 +18,29 @@
               <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name  %></h5>
             <% end %>
               content: <%= arch.body %><br>
-              <%= arch.created_at %><br>
-              <% if user_signed_in? %>
-                <% if current_user.id == arch.user_id %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"} %>
-                <% elsif current_user.admin? %>
-                  <%= link_to "edit", edit_arch_path(arch.id) %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"} %>
+            <div class="d-flex justify-content-between align-items-center card-body-footer">
+              <div class="btn-group">
+                    <%= link_to "view", arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
+                <% if user_signed_in? %>
+                  <% if current_user.id == arch.user_id %>
+                    <%= link_to "edit", edit_arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
+                    <%= link_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"},class: "btn btn-sm btn-outline-secondary" %>
+                  <% elsif current_user.admin? %>
+                    <%= link_to "edit", edit_arch_path(arch.id),class: "btn btn-sm btn-outline-secondary" %>
+                    <%= link_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"},class: "btn btn-sm btn-outline-secondary" %>
+                  <% end %>
                 <% end %>
-              <% end %>
+                </div>
+                  <% if (@now - arch.created_at) <= 60 * 60 %>
+                    <small class="text-muted"><%=((@now - arch.created_at) / 60).to_i.to_s + "分前" %></small>
+                  <% elsif (@now - arch.created_at) <= 60 * 60 * 24 %>
+                    <small class="text-muted"><%=((@now - arch.created_at) / 3600).to_i.to_s + "時間前" %></small>
+                  <% elsif (@today - arch.created_at.to_date) <= 30 %>
+                    <small class="text-muted"><%= (@today - arch.created_at.to_date).to_i.to_s + "日前" %></small>
+                  <% else %>
+                    <small class="text-muted"><%= arch.created_at.strftime('%Y-%m-%d') %></small>
+                  <% end %>
+              </div>
           </div>
         </div>
     <% end %>

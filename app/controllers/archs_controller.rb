@@ -1,6 +1,8 @@
 class ArchsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   def index
+    @today = Date.today
+    @now = Time.now
     if params[:search] != nil && params[:search] != ''
       #部分検索かつ複数検索
       search = params[:search]

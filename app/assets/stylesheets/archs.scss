@@ -45,11 +45,26 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
 .card{
   display: inline-block;
   text-align: left;
+  // padding-bottom: 16px;
 }
 
 .card-img-top{
   height: 250px;
 }
+
+// .card-body{
+//   position: relative;
+// 	padding-bottom: 3rem;
+// }
+
+.card-title{
+  height: 40px;
+}
+
+// .card-body-footer{
+//   position: absolute;
+// 	bottom: 0;
+// }
 
 .container{
   margin-top: 56px;
