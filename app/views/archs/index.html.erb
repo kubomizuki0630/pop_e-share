@@ -2,34 +2,34 @@
   <div class="latestposts display-5 text-center mt-5 mb-5">Latest Posts</div>
   <div class="card-container">
     <% @archs.each do |arch| %>
-      <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
-        <div class="card mb-5" style="width: 18rem;">
-         title: <%= arch.title %><br>
+      <div class="card mb-5" style="width: 18rem;">
+        <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
+          <%= arch.title %><br>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
           <% else %>
             <%= image_tag "noimage.jpg",class: "card-img-top"  %>
           <% end %>
+        <% end %>
           <div class="card-body">
             <% if user_signed_in? %>
               <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
             <% else %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
+              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name  %></h5>
             <% end %>
               content: <%= arch.body %><br>
               <%= arch.created_at %><br>
               <% if user_signed_in? %>
                 <% if current_user.id == arch.user_id %>
                   <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"} %>
                 <% elsif current_user.admin? %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+                  <%= link_to "edit", edit_arch_path(arch.id) %>
+                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"} %>
                 <% end %>
               <% end %>
           </div>
         </div>
-      <% end %>
     <% end %>
   </div>
   <%= paginate @archs %>
