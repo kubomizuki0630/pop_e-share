@@ -1,73 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-  <%= link_to "E-Share", root_path ,class:"text-decoration-none navbar-brand" %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "MyPage", user_path(current_user.id) ,class:"text-decoration-none nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "newpost", arch_new_path ,class:"text-decoration-none nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= button_to 'LogOut', destroy_user_session_path, method: :delete ,class:"delete_button nav-link active" %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-        <%= link_to "LogIn", root_path ,class:"text-decoration-none nav-link active" %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "SignUp", new_user_registration_path ,class:"text-decoration-none nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "newpost", arch_new_path ,class:"text-decoration-none nav-link active" %>
-        </li>
-      <% end %>
-      </ul>
-      <%= form_tag({controller:"archs",action:"index"}, method: :get ,class:"d-flex") do %>
-        <%= text_field_tag :search  ,"",class:"form-control me-2" %>
-        <%= submit_tag 'search' ,class:"btn btn-outline-success" %>
-      <% end %>
-    </div>
-  </div>
-</nav>
-<div class="container">
   <div class="top-image"></div>
   <div class="latestposts display-5 text-center mt-5 mb-5">Latest Posts</div>
   <div class="card-container">
     <% @archs.each do |arch| %>
-      <div class="card mb-5" style="width: 18rem;">
-        <% if arch.image? %>
-            <%= image_tag arch.image_url, class: "card-img-top" %>
-        <% else %>
-        <div class="card-img-top"></div>
-        <% end %>
-        <div class="card-body">
-        <% if user_signed_in? %>
-          <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
-        <% else %>
-          <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
-        <% end %>
-            title: <%= arch.title %><br>
-          content: <%= arch.body %><br>
-          <%= arch.created_at %><br>
-          <%= link_to "more", arch_path(arch.id),class: "text-decoration-none badge bg-light text-dark" %>
-          <% if user_signed_in? %>
-            <% if current_user.id == arch.user_id %>
-              <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
-              <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
-            <% elsif current_user.admin? %>
-              <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
-              <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
-            <% end %>
+      <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
+        <div class="card mb-5" style="width: 18rem;">
+         title: <%= arch.title %><br>
+          <% if arch.image? %>
+              <%= image_tag arch.image_url, class: "card-img-top" %>
+          <% else %>
+            <%= image_tag "noimage.jpg",class: "card-img-top"  %>
           <% end %>
+          <div class="card-body">
+            <% if user_signed_in? %>
+              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
+            <% else %>
+              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
+            <% end %>
+              content: <%= arch.body %><br>
+              <%= arch.created_at %><br>
+              <% if user_signed_in? %>
+                <% if current_user.id == arch.user_id %>
+                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
+                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+                <% elsif current_user.admin? %>
+                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
+                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+                <% end %>
+              <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <%= paginate @archs %>
-</div>
+<%= link_to(arch_new_path) do %>
+  <i class="fa-solid fa-circle-plus fa-3x"></i>
+<% end %>
