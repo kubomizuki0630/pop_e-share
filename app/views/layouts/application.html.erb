@@ -44,7 +44,7 @@
       <% end %>
       </ul>
       <% if user_signed_in? %>
-        <%= form_tag({controller:"archs",action:"index"}, method: :get ,class:"d-flex") do %>
+        <%= form_tag({controller:"/archs",action:"index"}, method: :get ,class:"d-flex") do %>
           <%= text_field_tag :search  ,"",class:"form-control me-2" %>
           <%= submit_tag 'search' ,class:"btn btn-outline-success" %>
         <% end %>
@@ -59,7 +59,7 @@
   <div class="container">
     <%= yield %>
   </div>
-    <footer class="bd-footer py-5 mt-5 bg-light">
+    <footer class="bd-footer py-4 mt-5 bg-light">
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-3 mb-3">
@@ -68,7 +68,7 @@
           <span class="fs-5">E-Share</span>
         </a>
         <ul class="list-unstyled small text-muted">
-          <li class="mb-2"><a href="/docs/5.0/about/team/">Bootstrap team</a>が愛を込めて設計し <a href="https://github.com/twbs/bootstrap/graphs/contributors">コントリビュータ</a>と共に運営しています。</li>
+          <li class="mb-2">環境設計コースの皆さんが設計した作品を同期・先輩・後輩・未来の環境生に共有します。</li>
         </ul>
         <ul class="list-unstyled small text-muted my-4">
           <li class="mb-1">サイト 開発・運営 </li>
@@ -142,21 +142,18 @@
       <div class="col-6 col-lg-2 mb-3">
         <h5>Grade</h5>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2018度入学者</a></li>
-          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2019度入学者</a></li>
-          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2020度入学者</a></li>
-          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2021度入学者</a></li>
-          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2022度入学者</a></li>
+          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2018年度入学者</a></li>
+          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2019年度入学者</a></li>
+          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2020年度入学者</a></li>
+          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2021年度入学者</a></li>
+          <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2022年度入学者</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-2 mb-3">
-        <h5>Grade</h5>
+        <h5>Others</h5>
         <ul class="list-unstyled">
-        <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2018度入学者</a></li>
-        <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2019度入学者</a></li>
-        <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2020度入学者</a></li>
-        <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2021度入学者</a></li>
-        <li class="mb-2"><a href="https://github.com/twbs/bootstrap" class="text-decoration-none">2022度入学者</a></li>
+        <li class="mb-2"><a href="https://moodle.s.kyushu-u.ac.jp/" class="text-decoration-none">Moodle</a></li>
+        <li class="mb-2"><a href="https://ku-portal.kyushu-u.ac.jp/campusweb/top.do" class="text-decoration-none">Campusmate</a></li>
       </ul>
       </div>
     </div>

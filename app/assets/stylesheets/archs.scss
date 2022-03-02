@@ -12,6 +12,16 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
   left: 0;
   width: 100%;
 }
+
+.container_pt{
+  padding-top: 8vh;
+  min-height: 85vh;
+}
+
+.textarea{
+  height: 120px;
+}
+
 .top-image{
   background-image:url('toppage.jpeg');
   background-repeat: no-repeat;
