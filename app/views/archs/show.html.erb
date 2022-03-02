@@ -1,38 +1,40 @@
-<h3>detail</h3>
-<div class="arch">
-  <p><%= @arch.title %></p>
-  <p><%= @arch.body %></p>
-  <p><%= @arch.created_at %></p>
-  <% if user_signed_in? %>
-      <% if current_user.already_liked?(@arch) %>
-          <%= button_to arch_like_path(@arch), method: :delete do %>
-            <i class="fas fa-heart"></i><%= @arch.likes.count %>
-          <% end %>
-      <% else %>
-          <%= button_to arch_likes_path(@arch), method: :post do %>
-            <i class="far fa-heart"></i><%= @arch.likes.count %>
-          <% end %>
-      <% end %>
-  <% else %>
-      <p>いいねの数 = </p><%= @arch.likes.count %>
-  <% end %>
-</div>
-<div class="comment-wrapper">
-  <h3>Comments</h3>
-  <% @comments.each do |c| %>
-    <div>
-    <a href="/users/<%= c.user.id %>"><%= c.user.name unless c.user.blank? %></a><br>
-      <%= c.content %>
-    </div>
-      <br>
-  <% end %>
+<div class="container_pt">
+  <h3>detail</h3>
+  <div class="arch">
+    <p><%= @arch.title %></p>
+    <p><%= @arch.body %></p>
+    <p><%= @arch.created_at %></p>
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(@arch) %>
+            <%= button_to arch_like_path(@arch), method: :delete do %>
+              <i class="fas fa-heart"></i><%= @arch.likes.count %>
+            <% end %>
+        <% else %>
+            <%= button_to arch_likes_path(@arch), method: :post do %>
+              <i class="far fa-heart"></i><%= @arch.likes.count %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <p>いいねの数 = </p><%= @arch.likes.count %>
+    <% end %>
+  </div>
+  <div class="comment-wrapper">
+    <h3>Comments</h3>
+    <% @comments.each do |c| %>
+      <div>
+      <a href="/users/<%= c.user.id %>"><%= c.user.name unless c.user.blank? %></a><br>
+        <%= c.content %>
+      </div>
+        <br>
+    <% end %>
 
-  <% if user_signed_in? %>
-    <%= form_with(model: [@arch, @comment], local: true) do |f| %>
-      <%= f.text_area :content %>
-      <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> submit
+    <% if user_signed_in? %>
+      <%= form_with(model: [@arch, @comment], local: true) do |f| %>
+        <%= f.text_area :content %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments"></i> submit
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

@@ -1,18 +1,19 @@
-<h3><%= @user.name %>'s page</h3>
-<%= image_tag @user.image_url, size: "250x200" if @user.image? %><br>
-<p>name : <%= @user.name %></p>
-<p> email: <%= @user.email %></p>
-<% if current_user.id == @user.id %>
-  <%= link_to "edit", edit_user_registration_path %>
-<% end %>
-<div class="latestposts display-5 text-center mt-5 mb-5">
-  <%= @user.name %>'s posts
-</div>
+<div class="container_pt">
+  <h3><%= @user.name %>'s page</h3>
+  <%= image_tag @user.image_url, size: "250x200" if @user.image? %><br>
+  <p>name : <%= @user.name %></p>
+  <p> email: <%= @user.email %></p>
+  <% if current_user.id == @user.id %>
+    <%= link_to "edit", edit_user_registration_path %>
+  <% end %>
+  <div class="latestposts display-5 text-center mt-5 mb-5">
+    <%= @user.name %>'s posts
+  </div>
   <div class="card-container">
     <% @user.arches.each do |arch| %>
       <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
         <div class="card mb-5" style="width: 18rem;">
-         title: <%= arch.title %><br>
+        title: <%= arch.title %><br>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
           <% else %>
@@ -43,11 +44,11 @@
   <div class="latestposts display-5 text-center mt-5 mb-5">
   favorite posts
   </div>
-<div class="card-container">
+  <div class="card-container">
     <% @user.liked_arches.each do |arch| %>
       <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
         <div class="card mb-5" style="width: 18rem;">
-         title: <%= arch.title %><br>
+          title: <%= arch.title %><br>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
           <% else %>
@@ -75,3 +76,4 @@
       <% end %>
     <% end %>
   </div>
+</div>
