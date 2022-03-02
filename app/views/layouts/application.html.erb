@@ -123,7 +123,9 @@
         <h5>Links</h5>
         <ul class="list-unstyled">
           <li class="mb-2"><a href="/" class="text-decoration-none" >Home</a></li>
-          <li class="mb-2"><%= link_to "MyPage", user_path(current_user.id) ,class:"text-decoration-none" %></li>
+          <% if user_signed_in? %>
+            <li class="mb-2"><%= link_to "MyPage", user_path(current_user.id) ,class:"text-decoration-none" %></li>
+          <% end %>
           <li class="mb-2"><a href="/docs/5.0/examples/" class="text-decoration-none">Examples</a></li>
           <li class="mb-2"><a href="https://opencollective.com/bootstrap" class="text-decoration-none">Themes</a></li>
           <li class="mb-2"><a href="https://blog.getbootstrap.com/" class="text-decoration-none">Blog</a></li>
