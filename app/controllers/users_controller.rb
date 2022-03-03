@@ -8,4 +8,19 @@ class UsersController < ApplicationController
   def admin
     @users = User.all.order(id: "ASC")
   end
+  def index22
+    @users = User.all.order(id: "ASC")
+  end
+  def index23
+    @users = User.all.order(id: "ASC")
+  end
+  def index24
+    @users = User.all.order(id: "ASC")
+  end
+  def index25
+    @users = User.all.order(id: "ASC")
+  end
+  def index26
+    @users = User.all.order(id: "ASC")
+  end
 end

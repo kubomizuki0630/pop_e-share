@@ -17,6 +17,9 @@ class ArchsController < ApplicationController
     @comment = Comment.new
   end
 
+  def about
+  end
+  
   def new
     @arch = Arch.new
   end
