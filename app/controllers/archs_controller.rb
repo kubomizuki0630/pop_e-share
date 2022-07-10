@@ -12,6 +12,8 @@ class ArchsController < ApplicationController
     end  end
 
   def show
+    @today = Date.today
+    @now = Time.now
     @arch = Arch.find(params[:id])
     @comments = @arch.comments
     @comment = Comment.new

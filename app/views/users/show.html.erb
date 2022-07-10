@@ -1,79 +1,64 @@
 <div class="container_pt">
-  <h3><%= @user.name %>'s page</h3>
-  <%= image_tag @user.image_url, size: "250x200" if @user.image? %><br>
-  <p>name : <%= @user.name %></p>
-  <p> email: <%= @user.email %></p>
-  <% if current_user.id == @user.id %>
-    <%= link_to "edit", edit_user_registration_path %>
-  <% end %>
-  <div class="latestposts display-5 text-center mt-5 mb-5">
-    <%= @user.name %>'s posts
+  <div class="users-info">
+    <%= image_tag @user.image_url, size: "250x200",class:"users-image" if @user.image? %><br>
+    <div class="users-info-right">
+      <h3 class="username">
+        <%= @user.name %>
+        <% if current_user.id == @user.id %>
+          <%= link_to  edit_user_registration_path do %>
+            <i class="fa-solid fa-pen-to-square edit_link"></i>
+          <% end %>
+        <% end %>
+      </h3>
+      <p> No. <%= @user.number %></p>
+      <div class="profile"><%= text_url_to_link(safe_join((h(@user.body)).split("\n"),tag(:br))).html_safe %></div>
+    </div>
   </div>
   <div class="card-container">
-    <% @user.arches.each do |arch| %>
-      <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
-        <div class="card mb-5" style="width: 18rem;">
-        title: <%= arch.title %><br>
+    <% @user.arches.order(id: "DESC").each do |arch| %>
+      <div class="card mb-5" style="width: 18rem;">
+        <%= link_to(arch_path(arch.id),class:'text-decoration-none text-success') do %>
+          <div class="card-header card-title"><%= arch.title %></div>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
           <% else %>
-          <div class="card-img-top"></div>
+            <%= image_tag "noimage.jpg",class: "card-img-top"  %>
           <% end %>
+        <% end %>
           <div class="card-body">
             <% if user_signed_in? %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
+              <h5 class="card-title"><span class="fz-10">投稿者 :</span><a href="/users/<%= arch.user.id %>" class="text-decoration-none text-success" ><%= arch.user.name %></a></h5>
             <% else %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
+              <h5 class="card-title "><span class="fz-10">投稿者 :</span><%= arch.user.name  %></h5>
             <% end %>
-              content: <%= arch.body %><br>
-              <%= arch.created_at %><br>
-              <% if user_signed_in? %>
-                <% if current_user.id == arch.user_id %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
-                <% elsif current_user.admin? %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
+            <div class="d-flex justify-content-between align-items-center card-body-footer">
+              <div class="btn-group">
+                    <%= link_to "detail", arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
+                <% if user_signed_in? %>
+                  <% if current_user.id == arch.user_id %>
+                    <%= link_to "edit", edit_arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
+                    <%= link_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"},class: "btn btn-sm btn-outline-secondary" %>
+                  <% elsif current_user.admin? %>
+                    <%= link_to "edit", edit_arch_path(arch.id),class: "btn btn-sm btn-outline-secondary" %>
+                    <%= link_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"},class: "btn btn-sm btn-outline-secondary" %>
+                  <% end %>
                 <% end %>
-              <% end %>
+                </div>
+                  <% if (@now - arch.created_at) <= 60 * 60 %>
+                    <small class="text-muted"><%=((@now - arch.created_at) / 60).to_i.to_s + "分前" %></small>
+                  <% elsif (@now - arch.created_at) <= 60 * 60 * 24 %>
+                    <small class="text-muted"><%=((@now - arch.created_at) / 3600).to_i.to_s + "時間前" %></small>
+                  <% elsif (@today - arch.created_at.to_date) <= 30 %>
+                    <small class="text-muted"><%= (@today - arch.created_at.to_date).to_i.to_s + "日前" %></small>
+                  <% else %>
+                    <small class="text-muted"><%= arch.created_at.strftime('%Y-%m-%d') %></small>
+                  <% end %>
+              </div>
           </div>
         </div>
-      <% end %>
     <% end %>
   </div>
-  <div class="latestposts display-5 text-center mt-5 mb-5">
-  favorite posts
-  </div>
-  <div class="card-container">
-    <% @user.liked_arches.each do |arch| %>
-      <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
-        <div class="card mb-5" style="width: 18rem;">
-          title: <%= arch.title %><br>
-          <% if arch.image? %>
-              <%= image_tag arch.image_url, class: "card-img-top" %>
-          <% else %>
-          <div class="card-img-top"></div>
-          <% end %>
-          <div class="card-body">
-            <% if user_signed_in? %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
-            <% else %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name %></h5>
-            <% end %>
-              content: <%= arch.body %><br>
-              <%= arch.created_at %><br>
-              <% if user_signed_in? %>
-                <% if current_user.id == arch.user_id %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "text-decoration-none" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
-                <% elsif current_user.admin? %>
-                  <%= link_to "edit", edit_arch_path(arch.id) ,class: "edit_link" %>
-                  <%= button_to "delete", arch_path(arch.id), method: :delete ,data: {confirm: "Do you want to delete it?"}, class: "delete_button" %>
-                <% end %>
-              <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+<%= link_to(arch_new_path) do %>
+  <i class="fa-solid fa-circle-plus fa-4x text-success"></i>
+<% end %>
 </div>

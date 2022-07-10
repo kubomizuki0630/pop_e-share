@@ -6,8 +6,8 @@
       <%= f.text_field :title, class:"form-control form-control-lg mb-3" %>
     </div>
     <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class:"form-control form-control-lg textarea mb-3" %>
+    <%= f.label :content %>
+    <%= f.text_area :body, class:"form-control form-control-lg textarea mb-3",placeholder:"<コンセプト>\n<工夫した点>\n<苦労した点>\n etc..." %>
     </div>
     <div class="form-group">
       <%= f.label :image %><br>
@@ -21,6 +21,6 @@
     <%= f.radio_button :release, '0',class:"form-check-input mb-4" %>
       <%= f.label :release, '非公開', value: 0 %>
     </div><br>
-    <%= f.submit "post",class:"btn btn-primary" %>
+    <%= f.submit "post",class:"btn btn-success" %>
   <% end %>
 </div>

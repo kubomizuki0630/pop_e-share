@@ -3,7 +3,7 @@
   <div class="card-container">
     <% @archs.each do |arch| %>
       <div class="card mb-5" style="width: 18rem;">
-        <%= link_to(arch_path(arch.id),class:'text-decoration-none') do %>
+        <%= link_to(arch_path(arch.id),class:'text-decoration-none text-success') do %>
           <div class="card-header card-title"><%= arch.title %></div>
           <% if arch.image? %>
               <%= image_tag arch.image_url, class: "card-img-top" %>
@@ -13,14 +13,13 @@
         <% end %>
           <div class="card-body">
             <% if user_signed_in? %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><a href="/users/<%= arch.user.id %>" class="text-decoration-none" ><%= arch.user.name %></a></h5>
+              <h5 class="card-title"><span class="fz-10">投稿者 :</span><a href="/users/<%= arch.user.id %>" class="text-decoration-none text-success" ><%= arch.user.name %></a></h5>
             <% else %>
-              <h5 class="card-title"> <%= image_tag arch.user.image_url, size: "50x50" if arch.user.image? %><%= arch.user.name  %></h5>
+              <h5 class="card-title "><span class="fz-10">投稿者 :</span><%= arch.user.name  %></h5>
             <% end %>
-              content: <%= arch.body %><br>
             <div class="d-flex justify-content-between align-items-center card-body-footer">
               <div class="btn-group">
-                    <%= link_to "view", arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
+                    <%= link_to "detail", arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
                 <% if user_signed_in? %>
                   <% if current_user.id == arch.user_id %>
                     <%= link_to "edit", edit_arch_path(arch.id) ,class: "btn btn-sm btn-outline-secondary" %>
@@ -47,5 +46,5 @@
   </div>
   <%= paginate @archs %>
 <%= link_to(arch_new_path) do %>
-  <i class="fa-solid fa-circle-plus fa-4x"></i>
+  <i class="fa-solid fa-circle-plus fa-4x text-success"></i>
 <% end %>

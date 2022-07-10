@@ -85,3 +85,39 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
   right:7%;
   bottom:7%;
 }
+
+.textarea{
+  height: 150px;
+}
+
+.fb{
+  font-weight: bold;
+  font-size:50px ;
+}
+
+.fz-10{
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+.show-body{
+  padding-top: 20px;
+  height: 30vh;
+}
+
+.edit_link{
+  margin-left: 5px;
+  color: gray;
+  font-size: 20px;
+}
+
+.show-image{
+  width: 80%;
+  height: 60vh;
+  object-fit: contain;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom:solid gray 1px;
+  border-top:solid gray 1px;
+  background-color: #f8f9fa;
+}

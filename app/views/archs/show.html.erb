@@ -1,40 +1,29 @@
 <div class="container_pt">
-  <h3>detail</h3>
-  <div class="arch">
-    <p><%= @arch.title %></p>
-    <p><%= @arch.body %></p>
-    <p><%= @arch.created_at %></p>
+  <h3>
+    <%= @arch.title %>
     <% if user_signed_in? %>
-        <% if current_user.already_liked?(@arch) %>
-            <%= button_to arch_like_path(@arch), method: :delete do %>
-              <i class="fas fa-heart"></i><%= @arch.likes.count %>
-            <% end %>
-        <% else %>
-            <%= button_to arch_likes_path(@arch), method: :post do %>
-              <i class="far fa-heart"></i><%= @arch.likes.count %>
-            <% end %>
-        <% end %>
-    <% else %>
-        <p>いいねの数 = </p><%= @arch.likes.count %>
-    <% end %>
-  </div>
-  <div class="comment-wrapper">
-    <h3>Comments</h3>
-    <% @comments.each do |c| %>
-      <div>
-      <a href="/users/<%= c.user.id %>"><%= c.user.name unless c.user.blank? %></a><br>
-        <%= c.content %>
-      </div>
-        <br>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <%= form_with(model: [@arch, @comment], local: true) do |f| %>
-        <%= f.text_area :content %>
-        <%= button_tag type: "submit" do %>
-          <i class="far fa-comments"></i> submit
+      <% if current_user.id == @arch.user_id %>
+        <%= link_to  edit_arch_path(@arch.id) do %>
+          <i class="fa-solid fa-pen-to-square edit_link"></i>
         <% end %>
       <% end %>
-    <% end %>
+  <% end %>
+  </h3>
+
+  <%= image_tag @arch.image_url, class: "show-image" if @arch.image? %>
+
+  <div class="show-body">
+  <h3 class="fz-20">content</h3>
+    <p><%= text_url_to_link(safe_join((h(@arch.body)).split("\n"),tag(:br))).html_safe %></p>
   </div>
+
+  <% if (@now - @arch.created_at) <= 60 * 60 %>
+    <small class="text-muted"><%=((@now - @arch.created_at) / 60).to_i.to_s + "分前" %></small>
+  <% elsif (@now - @arch.created_at) <= 60 * 60 * 24 %>
+    <small class="text-muted"><%=((@now - @arch.created_at) / 3600).to_i.to_s + "時間前" %></small>
+  <% elsif (@today - @arch.created_at.to_date) <= 30 %>
+    <small class="text-muted"><%= (@today - @arch.created_at.to_date).to_i.to_s + "日前" %></small>
+  <% else %>
+    <small class="text-muted"><%= @arch.created_at.strftime('%Y-%m-%d') %></small>
+  <% end %>
 </div>
