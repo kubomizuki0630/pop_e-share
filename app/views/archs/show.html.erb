@@ -10,7 +10,7 @@
   <% end %>
   </h3>
   <% if @arch.image? %>
-    <a href= <%=@arch.image_url %> data-lightbox="group">  <%= image_tag @arch.image_url, class: "show-image" if @arch.image? %></a>
+    <a href= <%=@arch.image_url %> data-lightbox="group"><%= image_tag @arch.image_url, class: "show-image" if @arch.image? %></a>
   <% end %>
   <div class="show-body">
   <h3 class="fz-20">content</h3>
