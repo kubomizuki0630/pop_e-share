@@ -9,9 +9,9 @@
       <% end %>
   <% end %>
   </h3>
-
-  <%= image_tag @arch.image_url, class: "show-image" if @arch.image? %>
-
+  <% if @arch.image? %>
+    <a href= <%=@arch.image_url %> data-lightbox="group">  <%= image_tag @arch.image_url, class: "show-image" if @arch.image? %></a>
+  <% end %>
   <div class="show-body">
   <h3 class="fz-20">content</h3>
     <p><%= text_url_to_link(safe_join((h(@arch.body)).split("\n"),tag(:br))).html_safe %></p>
